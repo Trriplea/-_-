@@ -1,0 +1,288 @@
+/* Базовые стили для игры Рогалик */
+
+* {
+    box-sizing: border-box;
+}
+
+body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #1a1a1a;
+    color: #ffffff;
+    font-family: "Roboto", "Arial", sans-serif;
+    padding: 20px;
+}
+
+/* Заголовок и информация */
+.title {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.title h1 {
+    font-family: "Playfair Display", serif;
+    font-size: 36px;
+    margin: 0 0 10px 0;
+    color: #ffd700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 15px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.health-display, .attack-display, .weapon-display, .enemies-display {
+    font-size: 16px;
+    font-weight: bold;
+    padding: 5px;
+    border-radius: 4px;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.health-display {
+    color: #00ff00;
+}
+
+.attack-display {
+    color: #ff6600;
+}
+
+.weapon-display {
+    color: #ffd700;
+}
+
+.enemies-display {
+    color: #ff4444;
+}
+
+#health {
+    color: #ff4444;
+    font-weight: bold;
+}
+
+/* Игровое поле */
+.field-box {
+    border: 3px solid #444444;
+    background-color: #2a2a2a;
+    margin: 0 auto;
+    width: fit-content;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.field {
+    position: relative;
+    width: 800px;
+    height: 480px;
+    background-color: #333333;
+    background-image: url('images/tile-.png');
+    background-size: 20px 20px;
+    background-repeat: repeat;
+    border: 1px solid #555555;
+    overflow: hidden;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+}
+
+/* Тайлы игрового поля */
+.field .tile {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 5;
+    transition: all 0.2s ease;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+    border-radius: 2px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Стены */
+.field .tileW {
+    background-image: url('images/tile-W.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 5;
+    box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.5);
+}
+
+/* Враги */
+.field .tileE {
+    background-image: url('images/tile-E.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 10;
+    animation: enemyPulse 2s infinite;
+    box-shadow: 0 0 4px rgba(255, 0, 0, 0.6);
+}
+
+@keyframes enemyPulse {
+    0%, 100% { 
+        transform: scale(1);
+        box-shadow: 0 0 4px rgba(255, 0, 0, 0.6);
+    }
+    50% { 
+        transform: scale(1.05);
+        box-shadow: 0 0 8px rgba(255, 0, 0, 0.8);
+    }
+}
+
+/* Игрок */
+.field .tileP {
+    background-image: url('images/tile-P.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 10;
+    animation: playerGlow 3s infinite;
+    box-shadow: 0 0 6px rgba(0, 100, 255, 0.7);
+}
+
+@keyframes playerGlow {
+    0%, 100% { 
+        box-shadow: 0 0 6px rgba(0, 100, 255, 0.7);
+    }
+    50% { 
+        box-shadow: 0 0 12px rgba(0, 150, 255, 0.9);
+    }
+}
+
+/* Зелья здоровья */
+.field .tileHP {
+    background-image: url('images/tile-HP.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 9;
+    animation: potionShine 2.5s infinite;
+    box-shadow: 0 0 3px rgba(0, 255, 0, 0.5);
+}
+
+@keyframes potionShine {
+    0%, 100% { 
+        opacity: 0.8;
+        box-shadow: 0 0 3px rgba(0, 255, 0, 0.5);
+    }
+    50% { 
+        opacity: 1;
+        box-shadow: 0 0 8px rgba(0, 255, 0, 0.8);
+    }
+}
+
+/* Мечи */
+.field .tileSW {
+    background-image: url('images/tile-SW.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 9;
+    animation: swordGlint 3s infinite;
+    box-shadow: 0 0 4px rgba(255, 215, 0, 0.6);
+}
+
+@keyframes swordGlint {
+    0%, 90%, 100% { 
+        box-shadow: 0 0 4px rgba(255, 215, 0, 0.6);
+    }
+    95% { 
+        box-shadow: 0 0 10px rgba(255, 255, 0, 1);
+    }
+}
+
+/* Полоски здоровья */
+.field .tile .health {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 3px;
+    background-color: #ff0000;
+    z-index: 11;
+    border-radius: 1px;
+    transition: width 0.3s ease;
+}
+
+.field .tileP .health {
+    background-color: #00ff00;
+}
+
+/* Эффекты при наведении */
+.field .tile:hover {
+    transform: scale(1.1);
+    z-index: 15;
+    transition: transform 0.1s ease;
+}
+
+/* Очистка float */
+.cl {
+    clear: both;
+    display: block;
+}
+
+/* Инструкции по управлению */
+.controls {
+    text-align: center;
+    margin-top: 20px;
+    color: #cccccc;
+    font-size: 14px;
+}
+
+.controls p {
+    margin: 5px 0;
+}
+
+/* Адаптивность */
+@media (max-width: 860px) {
+    .field {
+        width: 600px;
+        height: 360px;
+    }
+    
+    .field .tile {
+        width: 15px;
+        height: 15px;
+    }
+    
+    .title h1 {
+        font-size: 28px;
+    }
+}
+
+@media (max-width: 640px) {
+    .field {
+        width: 400px;
+        height: 240px;
+    }
+    
+    .field .tile {
+        width: 10px;
+        height: 10px;
+    }
+    
+    .field .tile::after {
+        font-size: 8px;
+    }
+    
+    .title h1 {
+        font-size: 24px;
+    }
+}
+

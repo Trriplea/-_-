@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,700&amp;subset=cyrillic" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&amp;subset=cyrillic" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700&amp;subset=cyrillic" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i|Tinos:400,400i&amp;subset=cyrillic" rel="stylesheet">
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		<link rel="stylesheet" href="styles.css">
+		<script src="game.js"></script>
+	</head>
+	<body>
+		<div class="title">
+			<h1>Рогалик</h1>
+			<div class="stats-grid">
+				<div class="health-display">Здоровье: <span id="health">100</span>/<span id="maxHealth">100</span></div>
+				<div class="attack-display">Атака: <span id="attack">25</span></div>
+				<div class="weapon-display">Мечей: <span id="swords">0</span></div>
+				<div class="enemies-display">Врагов: <span id="enemies">10</span></div>
+			</div>
+		</div>
+		<div class="field-box"><div class="field"></div></div>
+		<div class="cl"></div>
+		
+		<div class="controls">
+			<p><strong>Управление:</strong></p>
+			<p>WASD или стрелки - движение</p>
+			<p><strong>ПРОБЕЛ - атака</strong> всех врагов рядом</p>
+			<p>🛡️ Игрок | 👹 Враги | 🧪 Зелья | ⚔️ Мечи</p>
+		</div>
+
+		<script>
+			$(document).ready(function() {
+				console.log("Document ready, starting game...");
+				var game = new Game();
+				game.init();
+			});
+		</script>
+	</body>
+</html>
